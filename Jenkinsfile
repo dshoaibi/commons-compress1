@@ -1,12 +1,15 @@
 pipeline {
-  agent any
-  stages {
-    stage('') {
-      steps {
-        echo 'ALOHA!'
-        measure(VMs: 1, executeParallel: true, executeRCA: true, iterations: 1, repetitions: 1, timeout: 1, versionDiff: 1, warmup: 1)
-      }
+    agent any
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
+        stage('measurement') {
+            steps {
+                measure VMs: 30, iterations: 10, warmup: 10, repetitions: 100000
+            }
+        }
     }
-
-  }
 }
