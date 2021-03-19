@@ -6,10 +6,6 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-        stage('measurement') {
-            steps {
-                measure VMs: 30, iterations: 10, warmup: 10, repetitions: 100000
-            }
-        }
+        
     }
 }
